@@ -1,0 +1,301 @@
+#practical--1===vscode 2022
+
+ [WebMethod]
+ public double D2R(Double doller)
+ {
+     double ans = doller * 82;
+     return ans;
+ }
+ [WebMethod]
+ public double R2D(Double rupees)
+ {
+     double ans = rupees / 82;
+     return ans;
+ }
+
+
+#pract 1 B ===net beans
+#newwebservices
+@WebService(serviceName = "NewWebService")
+public class NewWebService {
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "IntroDoller")
+    public String IntroDoller(@WebParam(name = "a") double a) {
+        //TODO write your implementation code here:
+        return "The indian rupees"+a+ "in dollers is : "+(a/83.17);
+    }
+
+}
+
+
+
+
+##output.jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <form action="output.jsp">
+            <pre>
+                Enter Indian rupees to convert : <input type="text" name="t1">
+                <input type="submit"> <input type="reset">
+        </form>
+    </body>
+</html>
+
+-------------------------------------------------------------------------------------
+
+PRACTICAL 2 AIM – Create a simple SOAP service
+
+1. open netbeans > file > new project > java web > web application > next > next 
+2. right click on your project > add > new > web service  -> finish
+3. give name web service name=operations & package name=com.webservice ->
+4. open web service folder > right click on your web service (operation) > add operation ->
+give name operation name=addition return type=int  > click on add button > give name to two numbers (type n1, int and n2, int in below boxes)
+5. copy paste the below code by replacing the '@webmethod' part and not removing the above code already given
+6. right click on project > deploy
+7. right click on web service(operations) > test web service
+
+@WebMethod(operationName = "Addition")
+    public int Addition(@WebParam(name = "n1") int n1, @WebParam(name = "n2") int n2) {
+        int sum = n1+n2;
+        return sum;
+    }
+
+    
+    @WebMethod(operationName = "substraction")
+    public int substraction(@WebParam(name = "n1") int n1, @WebParam(name = "n2") int n2) {
+        int sub = n1-n2;
+        return sub;
+    }
+
+    
+    @WebMethod(operationName = "multiplication")
+    public int multiplication(@WebParam(name = "n1") int n1, @WebParam(name = "n2") int n2) {
+       int mul = n1*n2;
+        return mul;
+    }
+}
+
+-------------------------------------------------------------------------------------
+
+
+PRACTICAL 3 AIM: Create simple REST service
+
+new project > java web > web application > project name=RestfulServices > next -> 
+right click on project > new > others (if restful from pattern is not in the list)> web services > RESTful web services > next ->
+select simple root resources ->  next -> Type "StringOPerationPackage" in package name > finish
+
+@PUT
+    @Consumes("text/html")
+    public void putHtml(String content) {
+    }
+    
+    @PUT
+    @Consumes("text/html")
+    @Path("/UpperCase")
+    public String toUpperCaseMethod(String Str){
+        return Str.toUpperCase();
+    }
+    @PUT
+    @Consumes("text/html")
+    @Path("/LowerCase")
+    public String toLowerCaseMethod(String Str){
+        return Str.toLowerCase();
+    }
+}
+
+right click on project and clean the project > 
+right click on project > deploy
+right click on RESTful web services folder > test web service > Finish
+
+Now in the output popup, open the restful folder > open generic folder > select uppercase > type something in the box > if the text gets uppercase, you got the output!
+
+-------------------------------------------------------------------------------------
+
+PRACTICAL 4 AIM – Develop application to consume Google’s search / Google map RESTful Web service
+
+
+import requests
+def get_geolocation(api_key, search_string):
+  base_url = "https://us1.locationiq.com/v1/search"
+  params = {
+    'key': api_key,
+    'q': search_string,
+    'format': 'json',
+    }
+  response = requests.get(base_url, params=params)
+  data = response.json()
+  if response.status_code == 200 and data:
+    result = {
+      'place_id': data[0].get('place_id', ''),
+      'lat': data[0].get('lat', ''),
+      'lon': data[0].get('lon', ''),
+      'display_name': data[0].get('display_name', ''),
+      }
+    return result
+  else:
+    print(f"Error: {response.status_code} - {data.get('error', 'No error message')}")
+    return None
+api_key = 'pk.48e2c6dba021e9d624a3a5bb8d1e9c46'
+search_string = input("Enter the location : ")
+result = get_geolocation(api_key, search_string)
+if result:
+  print("Output:")
+  for key, value in result.items():
+    print(f"{key}: {value}")
+
+NOTE:: BROWSE LOCATION IQ>SIGNUP WITH EMAIL> CLICK ON THE LINK PROVIDED BY LOCATION
+IQ (on your email)>YOU WILL GET YOUR ACCESS TOKEN COPY THE KEY AND PASTE IN THE
+PYTHON CODE
+
+-------------------------------------------------------------------------------------
+
+PRACTICAL 5 AIM – Installation and configuration of virtualization using a KVM.
+
+
+Open Ubuntu in virtual machine. 
+Now open the terminal and perform the following command
+
+1)sudo grep -c "svm\|vmx" /proc/cpuinfo
+2)sudo apt-get install qemu-kvm libvirt-bin bridge-utils virt-manager
+3)sudo adduser shraddha
+4)sudo adduser shraddha libvirtd
+5)virsh -c qemu:///system list
+6)virt-manager
+
+Click on new virtual machine in qemu and perform the following step
+1. Choose "Local install media" > Forward
+2. Choose "locate your install media" > Use ISO image > Tick "Automatically detect"
+3. "create a disk image"
+
+-------------------------------------------------------------------------------------
+
+PRACTICAL 6 AIM – Develop application to consume Google’s search / Google map RESTful Web service.
+
+##############DownloadImageWS.asmx.cs file
+
+1. open vs code
+2. Select ASP.NET Application (.NET Framework)
+3. Give the project name as "VinayDownloadImgFromWS" > Create
+4. select "empty"
+5. . After that open solution explorerRight click on projectAddNew
+Itemwebservice(ASMX) and give the name > add
+
+"DownloadImageWS.asmx.cs file"
+using System;
+using
+System.Collections.Generic;
+using
+System.ComponentModel;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+namespace VinayDownloadImgFromWS
+{
+[WebService(Namespace = "http://tempuri.org/")]
+[WebServiceBinding(ConformsTo =
+WsiProfiles.BasicProfile1_1)]
+[System.ComponentModel.ToolboxItem(false)]
+uncomment thefollowing line.
+public class DownloadImageWS : System.Web.Services.WebService
+{
+[WebMethod]
+public string HelloWorld()
+{
+return "Hello World";
+}
+[WebMethod, Description("Get Image
+Content")]public byte[] GetImageFile(String
+filename)
+{
+if (System.IO.File.Exists(Server.MapPath("~/Images/") + filename))
+
+{
+return System.IO.File.ReadAllBytes(Server.MapPath("~/Images") +
+filename);
+}
+else
+{
+return new byte[] { 0 };
+}
+}
+}
+
+5. Now again right click on projectAddnew itemsearch handlerselect generic handler and give name as "VinayHandler.ashxashx.cs"
+
+############VinayHandler.ashx.cs file
+
+
+using System;
+using
+System.Collections.Generic;
+using System.Linq;
+using System.Web;
+namespace VinayDownloadImgFromWS
+{
+public class VinayHandler : IHttpHandler
+{
+public void ProcessRequest(HttpContext context)
+{
+DownloadImageWS ws = new DownloadImageWS();
+byte[] binImage =
+ws.GetImageFile(context.Request["filename"]);if
+}
+else
+{
+context.Response.ContentType =
+"image/jpeg";
+context.Response.BinaryWrite(binImage);
+}
+}
+public bool IsReusable
+{
+get
+{
+return false;
+}
+}
+}
+}
+
+6. Again right click on projectAddnew itemselect web formGive the name
+7. Click on Viewtoolboxtdesign the following form
+8. Now double click on button and change code
+9. Write click on Project and create folder images and paste the images. 
+10. After that execute the code and Enter the Image name
+
+----------------------------------------------------------------------------------
+
+PRACTICAL 7 AIM : Implement FOSS-Cloud Functionality VSI (Virtual Server
+Infrastructure) Infrastructure as a Service (IaaS), Storage
+
+Directly follow STEPS if the interface shows some username, password, ip adress. Or else start from the NOTE!
+
+NOTE : Select foss installer(default boot) > enter > again enter > type yes (if asks to start the installation) > enter > type '1' > enter > sda > yes > again yes > enter the ethernet name as shown on the screen > enter > yes > yes
+
+The installation is now done!
+
+Steps:
+
+1. Open the System where you have downloaded the FOSS- Cloud. 
+2. Enter user = 'root' & Password = 'admin'.
+
+Now write following command:
+fc-node- configuration -n demo- system -password admin
+fc-node-configuration -n demo- system --password admin(if above doesnt work)
+
+3. Now enter "ifconfig" .
+4. Now copy or save the IP Address (192.168.0.192)
+5. Now open the browser of another device and type that IP address in new tab.
+6. Username-admin & Password-admin
+
+
+

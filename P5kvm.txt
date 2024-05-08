@@ -1,0 +1,10 @@
+sudo grep -c "svm\|vmx" /proc/cpuinfo
+
+sudo apt-get install qemu-kvm libvirt-bin bridge-utils virt-manager
+
+sudo adduser yourname
+
+sudo adduser yourname libvirtd
+
+virt-manager
+
